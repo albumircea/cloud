@@ -1,0 +1,9 @@
+<div *ngIf="product" class="container">
+  <div *ngIf="currentUser.role==='admin'">
+    <button class="btn btn-danger" (click)="deleteProduct()">Delete</button>
+    <button class="btn btn-primary" (click)="updateProduct()">Update</button>
+  </div>
+  <h1>{{product.name}}</h1>
+  <div>gasgasdfasdfasd</div>
+  <img src="{{product.imageUrl}}" alt="">
+</div>

@@ -1,0 +1,69 @@
+<form [formGroup]="productForm" *ngIf="productForm">
+  <div class="inputBorder">
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name of the product" [defaultValue]="productForm.get('name')" formControlName="name">
+    </mat-form-field>
+    <div *ngIf="productForm.controls['name'].errors?.required && !productForm.controls['name'].untouched"><span class="error">Name is required</span></div>
+  </div>
+
+  <div class="inputBorder">
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" [defaultValue]="productForm.get('description')"></textarea>
+    </mat-form-field>
+    <div *ngIf="productForm.controls['description'].errors?.required && !productForm.controls['description'].untouched"><span class="error">Description is required</span></div>
+  </div>
+
+  <div class="inputBorder">
+    <mat-form-field>
+      <mat-label>Price</mat-label>
+      <input matInput placeholder="Price of the product"  type="number" [defaultValue]="productForm.get('price')" formControlName="price">
+    </mat-form-field>
+
+  </div>
+
+  <div class="inputBorder">
+    <mat-form-field>
+      <mat-label>Discount</mat-label>
+      <input matInput placeholder="Discount of the product"  type="number" [defaultValue]="productForm.get('discount')" formControlName="discount">
+    </mat-form-field>
+  </div>
+
+
+  <div class="inputBorder" *ngIf="sizeList">
+    <mat-form-field appearance="fill">
+      <mat-label>Supplier</mat-label>
+      <mat-select formControlName="size">
+        <mat-option *ngFor="let sup of sizeList" [value]="sup">
+          {{sup.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="inputBorder" *ngIf="categoryList">
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let cat of categoryList" [value]="cat">
+          {{cat.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="inputBorder" *ngIf="brandList">
+    <mat-form-field appearance="fill">
+      <mat-label>Supplier</mat-label>
+      <mat-select formControlName="brand">
+        <mat-option *ngFor="let sup of brandList" [value]="sup">
+          {{sup.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="inputBorder">
+    <button class="btn btn-primary" (click)="sendProduct.emit()">Save</button>
+  </div>
+</form>

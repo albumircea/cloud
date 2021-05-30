@@ -1,0 +1,25 @@
+<figure class="figure">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" *ngIf="loginForm">
+    <div class="centerAll" >
+      <h2>Login</h2>
+      <mat-form-field class="example-full-width">
+        <mat-label>Username</mat-label>
+        <label>
+          <input matInput formControlName="username">
+        </label>
+      </mat-form-field>
+      <br>
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <label>
+          <input matInput  type="password" formControlName="password">
+        </label>
+      </mat-form-field>
+      <br>
+      <p *ngIf="!falseUserPassword" style="color:red"> User or password incorrect!</p>
+      <br>
+      <button mat-button (submit)="onSubmit()" color="primary">Login</button>
+      <button mat-button (click)="register()" color="accent">Register</button>
+    </div>
+  </form>
+</figure>

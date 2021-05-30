@@ -1,0 +1,3 @@
+<div [formGroup]="productForm" *ngIf="productForm">
+  <product-form [productForm]="productForm" [categoryList]="category" [brandList]="brand" [sizeList]="size" (sendProduct)="addProduct()"></product-form>
+</div>
