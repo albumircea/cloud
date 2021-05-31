@@ -9,6 +9,7 @@ import Category from '../model/category.model';
 import Size from '../model/size.model';
 import Brand from '../model/brand.model';
 import {ProductService} from '../../services/product.services';
+import { translationOneProdJson } from '../_helpers/help-function'
 
 @Component({
   selector: 'app-smart-update-product',
@@ -32,7 +33,9 @@ export class SmartUpdateProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.productService.getOneProduct(this.productId).subscribe((value) => {
-      this.product = value;
+      this.product = translationOneProdJson(value);
+      console.log(this.product.id);
+      console.log(this.product);
       this.productForm = this.fb.group({
         name: [this.product?.name, Validators.required],
         description: [this.product?.description , Validators.required],
@@ -48,10 +51,14 @@ export class SmartUpdateProductComponent implements OnInit {
     this.brandService.getBrands().subscribe((data) => this.brand = data);
   }
 
-  editProduct(): void{
-    this.product = {...this.productForm?.value, id: Number(this.productId)};
+  editProduct(): void {
+    this.product = {...this.productForm?.value, 
+      category: this.productForm.get('category').value.name, 
+      brand: this.productForm.get('brand').value.name, 
+      size: this.productForm.get('size').value.name,
+      id: this.product.id};
     // tslint:disable-next-line:no-non-null-assertion
-    this.productService.updateProduct(this.product!);
+    this.productService.updateProduct(this.product!).subscribe();
     this.router.navigateByUrl('/products');
   }
 
